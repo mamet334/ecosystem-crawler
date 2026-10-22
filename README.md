@@ -13,6 +13,24 @@ stealth boleh dipakai untuk menembus halaman publik yang memblokir. Dua garis te
 CAPTCHA/tantangan yang sudah muncul, dan **tidak** memakai akun/kredensial orang lain. Jeda acak antar-permintaan
 dipakai supaya tidak membebani situs. Tool aslinya di-fork ke akun Owner (lihat `pyproject.toml`).
 
+## ⚠️ Disclaimer / Tanggung jawab pemakai
+
+Perangkat ini dibuat untuk **riset dan edukasi pribadi**. Disediakan apa adanya, **tanpa jaminan apa pun**
+(lihat `LICENSE`).
+
+**Segala akibat dari pemakaian sepenuhnya menjadi tanggung jawab pemakai.** Dengan memakai perangkat ini, Anda
+setuju untuk:
+
+- menghormati **ketentuan layanan (ToS)** setiap situs yang Anda akses;
+- mematuhi **hukum yang berlaku** di wilayah Anda, termasuk di Indonesia UU ITE dan UU 27/2022 tentang Pelindungan
+  Data Pribadi;
+- **tidak** memakainya untuk mengakses sistem tanpa izin, memanen data pribadi secara massal, melecehkan, menipu,
+  atau merugikan pihak lain;
+- menanggung sendiri risiko pemblokiran IP/akun dan konsekuensi hukum atas pilihan pemakaian Anda.
+
+Pembuat dan kontributor tidak bertanggung jawab atas penyalahgunaan oleh pihak mana pun. Fitur yang berisiko
+(mematikan `robots.txt`, tingkat stealth) bersifat **pilihan sadar** yang bisa dimatikan — gunakan dengan bijak.
+
 | Kanal | Sumber | Tool asli yang dibungkus | Cara pakai |
 |---|---|---|---|
 | 📺 tv | `google_news` | feedparser | kata kunci; judul berita (isi lewat `web`) |
