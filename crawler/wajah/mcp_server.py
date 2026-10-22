@@ -39,7 +39,11 @@ Aturan:
 - Data hasil crawler berstatus hypothesis: data mentah, bukan kebenaran. Sebutkan sumber dan link saat mengutip.
 - Penulis ditampilkan sebagai pseudonim (p_...). Jangan mencoba mengungkap identitas di baliknya.
 - Fokus pada isu dan pola, bukan pada individu.
-- Crawler hanya memakai jalur yang diizinkan robots.txt atau API resmi, dan tidak menyamar (ADR-CRW-0009).
+- Cara crawler mengakses halaman adalah sakelar Owner yang bisa berubah (ADR-CRW-0010): apakah crawler mematuhi
+  robots.txt, dan apakah tingkat stealth (browser yang menyamarkan sidik jarinya) dipakai untuk halaman publik yang memblokir.
+  Keadaannya saat ini ada di `akses` pada hasil `katalog`. Jangan menyebut keadaan sakelar dari ingatan atau dari
+  aturan lama; bacalah `akses`. Yang selalu berlaku: crawler tidak menjawab CAPTCHA/tantangan yang sudah muncul, dan
+  tidak memakai akun orang lain.
 - Sumber rss_media hanya memuat berita terbaru dari Detik, CNN Indonesia, dan Antara. Untuk berita yang lebih lama
   atau spesifik, cari link-nya dengan mesin pencari Anda lalu kirim ke sumber web lewat url_awal.
 - Suara langsung masyarakat ada di mediakonsumen (surat pembaca keluhan konsumen), arctic_shift/reddit (diskusi),
@@ -111,11 +115,31 @@ def katalog() -> dict:
                         "komentar_per_video": "default 30 (perlu ambil_komentar)",
                         "urut": "relevan (default) | terbaru", "urut_komentar": "top (default) | new"},
             "kaskus": {"catatan": "hanya dari url_awal; mengambil postingan pembuka thread dan jumlah balasannya"},
-            "web": {"catatan": "hanya dari url_awal; isi utama halaman diekstrak, robots.txt dipatuhi"},
+            "web": {"catatan": "hanya dari url_awal; isi utama halaman diekstrak; robots.txt mengikuti sakelar "
+                               "(lihat akses)"},
             "inbox": {"saring_kata_kunci": "default true", "berkas": "pola nama berkas, mis. 'x_*.txt'"},
             "semua_sumber": {"kecualikan_penulis": "pola glob nama penulis yang dibuang, mis. ['*-poster.bsky.social']"},
         },
+        "akses": akses(status["patuhi_robots"], status["stealth"]),
         "versi": f"{status['name']} {status['version']}",
+    }
+
+
+def akses(patuhi_robots: bool, stealth: bool) -> dict:
+    """Keadaan sakelar akses saat ini (ADR-CRW-0010), dibaca dari .env saat server mulai — bukan teks tetap.
+
+    Dulu instruksi server menulis "robots.txt dipatuhi … tidak menyamar" sebagai fakta tetap (aturan ADR-CRW-0009),
+    padahal sakelarnya sudah ada dan bawaannya mati. AI yang membaca teks itu akan memberi tahu Owner hal yang salah."""
+    return {
+        "patuhi_robots": patuhi_robots,
+        "stealth": stealth,
+        "keterangan": (
+            f"robots.txt {'dipatuhi' if patuhi_robots else 'TIDAK dipatuhi'} (sakelar CRAWLER_PATUHI_ROBOTS). "
+            + ("Tingkat stealth NYALA: halaman publik yang memblokir dicoba lagi dengan browser yang menyamarkan "
+               "sidik jarinya, bila Scrapling dan browser-nya terpasang (sakelar CRAWLER_STEALTH)."
+               if stealth else "Tingkat stealth MATI: halaman yang memblokir dilewati (sakelar CRAWLER_STEALTH).")
+            + " Crawler tidak menjawab CAPTCHA/tantangan yang sudah muncul dan tidak memakai akun orang lain."
+        ),
     }
 
 

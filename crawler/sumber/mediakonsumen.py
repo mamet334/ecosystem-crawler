@@ -34,7 +34,7 @@ class MediaKonsumen(Sumber):
     kemampuan = ("feed", "tag")
     bahasa = ("id",)
     cocok_untuk = ("keluhan", "keluhan_konsumen", "layanan_publik", "produk_dan_jasa")
-    batas_laju = "jeda 1-2 detik per feed/halaman; robots.txt dipatuhi"
+    batas_laju = "jeda 1-2 detik per feed/halaman; robots.txt mengikuti sakelar (lihat akses di katalog)"
     alat = (
         {"nama": "feedparser", "repo": "github.com/kurtmckee/feedparser", "lisensi": "BSD-2-Clause"},
         {"nama": "trafilatura", "repo": "github.com/adbar/trafilatura", "lisensi": "Apache-2.0"},

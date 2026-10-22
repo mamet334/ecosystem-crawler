@@ -28,7 +28,7 @@ class Web(Sumber):
     kemampuan = ("url_langsung",)
     bahasa = ("semua",)
     cocok_untuk = ("artikel", "blog", "halaman_resmi", "hasil_mesin_pencari")
-    batas_laju = "jeda 1-2 detik per halaman; robots.txt dipatuhi"
+    batas_laju = "jeda 1-2 detik per halaman; robots.txt mengikuti sakelar (lihat akses di katalog)"
     alat = (
         {"nama": "trafilatura", "repo": "github.com/adbar/trafilatura", "lisensi": "Apache-2.0"},
         {"nama": "curl_cffi", "repo": "github.com/lexiforest/curl_cffi", "lisensi": "MIT"},

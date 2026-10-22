@@ -32,7 +32,7 @@ class RssMedia(Sumber):
     bahasa = ("id",)
     cocok_untuk = ("berita_terbaru", "isu_publik", "tren")
     pseudonim_penulis = False  # penulis berita = byline publik (ADR-CRW-0010)
-    batas_laju = "jeda 1-2 detik per feed/halaman; robots.txt dipatuhi"
+    batas_laju = "jeda 1-2 detik per feed/halaman; robots.txt mengikuti sakelar (lihat akses di katalog)"
     alat = (
         {"nama": "feedparser", "repo": "github.com/kurtmckee/feedparser", "lisensi": "BSD-2-Clause"},
         {"nama": "trafilatura", "repo": "github.com/adbar/trafilatura", "lisensi": "Apache-2.0"},
